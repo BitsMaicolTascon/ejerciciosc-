@@ -1,7 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
-
+#include <set>
 
 void SolicitarDatos(std::vector<std::vector<std::string> >& table) {
     int numRows;
@@ -9,15 +9,32 @@ void SolicitarDatos(std::vector<std::vector<std::string> >& table) {
     std::cin >> numRows;
 
     table.resize(numRows, std::vector<std::string>(3));
+    std::set<int> existingIDs; // Conjunto para almacenar IDs existentes
 
     for (int i = 0; i < numRows; i++) {
+        int id;
+        std::string name;
+        double grade;
+
         std::cout << "Ingrese el ID del estudiante: ";
-        std::cin >> table[i][0];
+        std::cin >> id;
+
+        // Verificar si el ID ya existe en el conjunto
+        while (existingIDs.count(id) > 0) {
+            std::cout << "ID repetido. Ingrese un ID diferente: ";
+            std::cin >> id;
+        }
+        existingIDs.insert(id); // Agregar el ID al conjunto
+
         std::cin.ignore(); // Limpiar el buffer del teclado
         std::cout << "Ingrese el nombre del estudiante: ";
-        std::getline(std::cin, table[i][1]);
+        std::getline(std::cin, name);
         std::cout << "Ingrese la nota del estudiante: ";
-        std::cin >> table[i][2];
+        std::cin >> grade;
+
+        table[i][0] = std::to_string(id);
+        table[i][1] = name;
+        table[i][2] = std::to_string(grade);
     }
 }
 
