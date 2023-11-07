@@ -1,3 +1,5 @@
+// Asistente para notas estudianteles, se lista en una matriz donde contiene 3 columnas id, nombre, Nota
+
 #include <iostream>
 #include <vector>
 #include <string>
