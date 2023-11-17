@@ -12,7 +12,7 @@ void SolicitarDatos(std::vector<std::vector<std::string> >& table) {
 
     table.resize(numRows, std::vector<std::string>(3));
     std::set<int> existingIDs; // Conjunto para almacenar IDs existentes
-
+    // set -> modifica directamente el valor de la variable privada.
     for (int i = 0; i < numRows; i++) {
         int id;
         std::string name;
@@ -46,7 +46,7 @@ void OrdenarPorIDAscendente(std::vector<std::vector<std::string> >& table) {
         std::vector<std::string> key = table[i];
         int j = i - 1;
 
-        while (j >= 0 && std::stoi(table[j][0]) > std::stoi(key[0])) {
+        while (j >= 0 && std::stoi(table[j][0]) > std::stoi(key[0])) { // stoi -> convierte la secuencia de caracteres de str en un valor de tipo int y devuelve el valor. 
             table[j + 1] = table[j];
             j = j - 1;
         }
