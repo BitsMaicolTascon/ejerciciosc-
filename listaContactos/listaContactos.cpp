@@ -27,12 +27,12 @@ class ListaContactos {
     }
 
     void agregaContacto(const std::string nombre, const std::string numeroTel, int id){
-       if (idExistente(id)) {
-            std::cout << "El ID ya existe. Ingrese un ID único.\n";
-        } else {
-            contactos.push_back({id, nombre, numeroTel});
-            std::cout << "Contacto agregado con éxito.\n";
+        while (idExistente(id)) {
+            std::cout << "El ID ya existe. Ingrese un ID válido: ";
+            std::cin >> id;
         }
+        contactos.push_back({id, nombre, numeroTel});
+        std::cout << "Contacto agregado con éxito.\n";
     }
 
     void ordenarPorId() {
