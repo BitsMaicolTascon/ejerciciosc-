@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Convergencia de la serie (n^2 - 3n) / (n^2 - 4n + 2)</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <canvas id="myChart" width="400" height="200"></canvas>
+
+  <script>
+    // Datos para la serie (n^2 - 3n) / (n^2 - 4n + 2)
+    const nValues = Array.from({ length: 100 }, (_, i) => i + 1);
+    const aValues = nValues.map(n => (n**2 - 3*n) / (n**2 - 4*n + 2));
+    const cumulativeSum = aValues.reduce((acc, val, i) => [...acc, val + (acc[i] || 0)], []);
+
+    // Configuración del gráfico
+    const ctx = document.getElementById('myChart').getContext('2d');
+    const myChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: nValues,
+        datasets: [{
+          label: 'Suma acumulativa de a_n',
+          data: cumulativeSum,
+          borderColor: 'rgba(75, 192, 192, 1)',
+          borderWidth: 1,
+          fill: false
+        }]
+      },
+      options: {
+        scales: {
+          x: {
+            type: 'linear',
+            position: 'bottom'
+          },
+          y: {
+            type: 'linear',
+            position: 'left'
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>
+
+

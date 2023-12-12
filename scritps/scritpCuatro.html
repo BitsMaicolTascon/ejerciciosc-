@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gráfica de la serie 5^n / (n(n + 1)!)</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <canvas id="myChart" width="400" height="200"></canvas>
+
+  <script>
+    // Función para calcular el factorial
+    function factorial(n) {
+      if (n === 0 || n === 1) {
+        return 1;
+      } else {
+        return n * factorial(n - 1);
+      }
+    }
+
+    // Datos para la serie 5^n / (n(n + 1)!)
+    const nValues = Array.from({ length: 10 }, (_, i) => i + 1);
+    const aValues = nValues.map(n => 5**n / (n * factorial(n + 1)));
+
+    // Configuración del gráfico
+    const ctx = document.getElementById('myChart').getContext('2d');
+    const myChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: nValues,
+        datasets: [{
+          label: '5^n / (n(n + 1)!)',
+          data: aValues,
+          borderColor: 'rgba(75, 192, 192, 1)',
+          borderWidth: 1,
+          fill: false
+        }]
+      },
+      options: {
+        scales: {
+          x: {
+            type: 'linear',
+            position: 'bottom'
+          },
+          y: {
+            type: 'linear',
+            position: 'left'
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

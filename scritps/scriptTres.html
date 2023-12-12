@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Convergencia de la serie n^2 / n!</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <canvas id="myChart" width="400" height="200"></canvas>
+
+  <script>
+    // Función para calcular el factorial
+    function factorial(n) {
+      if (n === 0 || n === 1) {
+        return 1;
+      } else {
+        return n * factorial(n - 1);
+      }
+    }
+
+    // Datos para la serie n^2 / n!
+    const nValues = Array.from({ length: 20 }, (_, i) => i + 1);
+    const aValues = nValues.map(n => (n**2) / factorial(n));
+    const cumulativeSum = aValues.reduce((acc, val, i) => [...acc, val + (acc[i] || 0)], []);
+
+    // Configuración del gráfico
+    const ctx = document.getElementById('myChart').getContext('2d');
+    const myChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: nValues,
+        datasets: [{
+          label: 'Suma acumulativa de a_n',
+          data: cumulativeSum,
+          borderColor: 'rgba(75, 192, 192, 1)',
+          borderWidth: 1,
+          fill: false
+        }]
+      },
+      options: {
+        scales: {
+          x: {
+            type: 'linear',
+            position: 'bottom'
+          },
+          y: {
+            type: 'linear',
+            position: 'left'
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

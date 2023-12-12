@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gráfica de la serie e^n</title>
+  <!-- Incluye la biblioteca Chart.js desde CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <!-- Agrega un elemento canvas para el gráfico -->
+  <canvas id="myChart" width="400" height="200"></canvas>
+
+  <script>
+    // Datos para la serie e^n
+    const nValues = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    const aValues = nValues.map(n => Math.exp(n));
+
+    // Configuración del gráfico
+    const ctx = document.getElementById('myChart').getContext('2d');
+    const myChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: nValues,
+        datasets: [{
+          label: 'e^n',
+          data: aValues,
+          borderColor: 'rgba(75, 192, 192, 1)',
+          borderWidth: 1,
+          fill: false
+        }]
+      },
+      options: {
+        scales: {
+          x: {
+            type: 'linear',
+            position: 'bottom'
+          },
+          y: {
+            type: 'linear',
+            position: 'left'
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>
